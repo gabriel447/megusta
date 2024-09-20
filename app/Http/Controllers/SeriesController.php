@@ -12,6 +12,6 @@ class SeriesController
             'how i meet your mother'
         ];
 
-        return view('series', compact('series'));
+        return view('series')->with('series', $series);
     }
 }
