@@ -1,5 +1,6 @@
 <x-layout title="Nova Série">
-    <form action="" method="post">
+    <form action="/series/salvar" method="post">
+        @csrf
         <div class="row mb-3 w-50">
             <label for="nome" class="col-form-label">Nome</label>
             <div class="col-sm-10">
