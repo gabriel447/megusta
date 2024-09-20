@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-class SeriesController
+use Illuminate\Http\Request;
+
+class SeriesController extends Controller
 {
-    public function listarSeries()
+    public function index()
     {
         $series = [
             'breaking bad',
@@ -12,6 +14,11 @@ class SeriesController
             'how i meet your mother'
         ];
 
-        return view('series')->with('series', $series);
+        return view('series.index', compact('series'));
+    }
+
+    public function create(Request $request)
+    {
+        return view('series.create');
     }
 }

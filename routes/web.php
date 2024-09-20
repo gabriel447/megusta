@@ -6,8 +6,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/hello', function () {
-    return view('hello');
-});
-
-Route::get('/series', 'App\Http\Controllers\SeriesController@listarSeries');
+Route::get('/series', 'App\Http\Controllers\SeriesController@index');
+Route::get('/series/criar', 'App\Http\Controllers\SeriesController@create');
