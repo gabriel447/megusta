@@ -10,7 +10,6 @@ class SeriesController extends Controller
     public function index()
     {
         $series = DB::select('SELECT nome FROM series');
-    
         return view('series.index', compact('series'));
     }
 
@@ -22,10 +21,7 @@ class SeriesController extends Controller
     public function store(Request $request)
     {
         $nomeSerie = $request->input('nome');
-        if(DB::insert('INSERT INTO series (nome) VALUES (?)', [$nomeSerie])) {
-            return "OK";
-        }else {
-            return "Deu erro";
-        }
+        DB::insert('INSERT INTO series (nome) VALUES (?)', [$nomeSerie]);
+        return redirect('/series');
     }
 }
