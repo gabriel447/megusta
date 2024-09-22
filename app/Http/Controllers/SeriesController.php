@@ -25,4 +25,10 @@ class SeriesController extends Controller
         Serie::create($request->all());
         return to_route('series.index');
     }
+
+    public function destroy(Request $request)
+    {
+        Serie::destroy($request->id);
+        return to_route('series.index');
+    }
 }
