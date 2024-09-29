@@ -2,7 +2,7 @@
     <form action="{{ route('series.store') }} " method="post">
         @csrf
 
-        <div class="row mb-3 w-50">
+        <div class="row mb-3">
             <div class="col-8">
                 <label for="nome" class="col-form-label">Nome</label>
                 <input type="text"

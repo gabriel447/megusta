@@ -3,7 +3,7 @@
     @if($update)
     @method('PUT')
     @endif
-    <div class="row mb-3 w-50">
+    <div class="row mb-3">
         <label for="nome" class="col-form-label">Nome</label>
         <div class="col-sm-10">
             <input type="text"
