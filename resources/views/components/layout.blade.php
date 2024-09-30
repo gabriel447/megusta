@@ -8,7 +8,7 @@
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
+    <div class="container-fluid px-3">
         <a class="navbar-brand" href="{{ route('series.index') }}">Home</a>
         @auth
         <form action="{{ route('logout') }}" method="post">
@@ -24,7 +24,7 @@
         @endguest
     </div>
 </nav>
-<div class="container-fluid">
+<div class="container-fluid p-5">
     <h1>{{ $title }}</h1>
     
     @isset($mensagemSucesso)
