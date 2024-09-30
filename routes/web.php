@@ -8,21 +8,26 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsersController;
 use App\Http\Middleware\Autenticador;
 
-Route::get('/', function () {
-    return redirect('/series');
-})->middleware(Autenticador::class);
-
 Route::resource('/series', SeriesController::class)
-    ->except(['show'])
-    ->middleware(Autenticador::class);
+        ->except(['show'])
+        ->middleware(Autenticador::class);
 
-Route::get('/series/{series}/seasons', [SeasonsController::class, 'index'])->name('seasons.index')->middleware(Autenticador::class); 
+Route::middleware(Autenticador::class)->group(function () {
 
-Route::get('/seasons/{season}/episodes', [EpisodesController::class, 'index'])->name('episodes.index')->middleware(Autenticador::class);
+    Route::get('/', function () {
+        return redirect('/series');
+    });
 
-Route::post('/seasons/{season}/episodes', [EpisodesController::class, 'index'])->name('episodes.index')->middleware(Autenticador::class);
+    Route::get('/series/{series}/seasons', [SeasonsController::class, 'index'])->name('seasons.index'); 
 
-Route::post('/seasons/{season}/episodes', [EpisodesController::class, 'update'])->name('episodes.update')->middleware(Autenticador::class);
+    Route::get('/seasons/{season}/episodes', [EpisodesController::class, 'index'])->name('episodes.index');
+
+    Route::post('/seasons/{season}/episodes', [EpisodesController::class, 'index'])->name('episodes.index');
+
+    Route::post('/seasons/{season}/episodes', [EpisodesController::class, 'update'])->name('episodes.update');
+});
+
+
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('signin');
