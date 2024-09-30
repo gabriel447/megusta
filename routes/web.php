@@ -9,9 +9,9 @@ use App\Http\Controllers\UsersController;
 use App\Http\Middleware\Autenticador;
 
 Route::resource('/series', SeriesController::class)
-        ->except(['show'])
-        ->middleware(Autenticador::class);
-
+    ->except(['show'])
+    ->middleware(Autenticador::class);
+    
 Route::middleware(Autenticador::class)->group(function () {
 
     Route::get('/', function () {
@@ -26,8 +26,6 @@ Route::middleware(Autenticador::class)->group(function () {
 
     Route::post('/seasons/{season}/episodes', [EpisodesController::class, 'update'])->name('episodes.update');
 });
-
-
 
 Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('/login', [LoginController::class, 'store'])->name('signin');
