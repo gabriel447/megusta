@@ -5,13 +5,12 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SeriesFormRequest;
 use App\Models\Series;
 use App\Repositories\SeriesRepository;
-use Illuminate\Http\Request;
 
 class SeriesController extends Controller
 {
     public function __construct(private SeriesRepository $repository){}
 
-    public function index(Request $request)
+    public function index()
     {
         $series = Series::all();
         $mensagemSucesso = session('mensagem.sucesso');
@@ -29,7 +28,7 @@ class SeriesController extends Controller
         return to_route('series.index')->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso!");
     }
 
-    public function destroy(Series $series, Request $request)
+    public function destroy(Series $series)
     {
         $series->delete();
         return to_route('series.index')->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso!");
