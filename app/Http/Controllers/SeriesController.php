@@ -41,7 +41,10 @@ class SeriesController extends Controller
     public function destroy(Series $series)
     {
         $series->delete();
-        return to_route('series.index')->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso!");
+        \App\Jobs\DeleteSeriesCover::dispatch($series->cover);
+
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$series->nome}' removida com sucesso");
     }
 
     public function edit(Series $series)
