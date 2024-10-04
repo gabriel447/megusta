@@ -9,8 +9,8 @@ use Illuminate\Database\Eloquent\Model;
 class Series extends Model
 {
     use HasFactory;
-    protected $fillable = ['nome'];
-
+    protected $fillable = ['nome', 'cover'];
+    
     public function seasons()
     {
         return $this->hasMany(Season::class, 'series_id');
