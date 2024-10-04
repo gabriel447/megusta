@@ -39,7 +39,7 @@
                     id="cover"
                     name="cover"
                     class="form-control"
-                    accept="image/gif, image/jpeg, image/png">
+                    accept="image/gif, image/jpeg, image/png, image/jpg">
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>

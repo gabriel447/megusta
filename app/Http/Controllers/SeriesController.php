@@ -23,9 +23,9 @@ class SeriesController extends Controller
         return view('series.create');
     }
 
-    public function store(SeriesFormRequest $request) 
-    {
-        dd($request->file('cover'));
+    public function store(SeriesFormRequest $request)
+    {   $coverPath = $request->file('cover')->store('series_cover', 'public');
+        $request->coverPath = $coverPath;
         $serie = $this->repository->add($request);
         \App\Events\SeriesCreated::dispatch(
             $serie->nome,
@@ -33,8 +33,9 @@ class SeriesController extends Controller
             $request->seasonsQty,
             $request->episodesPerSeason,
         );
-        
-        return to_route('series.index')->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso!");
+
+        return to_route('series.index')
+            ->with('mensagem.sucesso', "Série '{$serie->nome}' adicionada com sucesso");
     }
 
     public function destroy(Series $series)
