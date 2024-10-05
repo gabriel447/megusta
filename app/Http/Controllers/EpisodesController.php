@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Season;
 use App\Models\Episode;
+use App\Models\Season;
 use Illuminate\Http\Request;
 
 class EpisodesController
@@ -22,8 +22,10 @@ class EpisodesController
         $season->episodes->each(function (Episode $episode) use ($watchedEpisodes) {
             $episode->watched = in_array($episode->id, $watchedEpisodes);
         });
+
         $season->push();
 
-        return to_route('episodes.index', $season->id)->with('mensagem.sucesso', 'Episódios marcados com sucesso!');    
+        return to_route('episodes.index', $season->id)
+            ->with('mensagem.sucesso', 'Episódios marcados como assistidos');
     }
 }

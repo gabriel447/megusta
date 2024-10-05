@@ -4,14 +4,17 @@ namespace App\Listeners;
 
 use App\Events\SeriesCreated as SeriesCreatedEvent;
 use App\Mail\SeriesCreated;
-use Illuminate\Support\Facades\Mail;
-use DateTime;
 use App\Models\User;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Mail;
 
-class EmailUsersAboutSeriesCreated
+class EmailUsersAboutSeriesCreated implements ShouldQueue
 {
     /**
      * Create the event listener.
+     *
+     * @return void
      */
     public function __construct()
     {
@@ -20,23 +23,22 @@ class EmailUsersAboutSeriesCreated
 
     /**
      * Handle the event.
+     *
+     * @param  object  $event
+     * @return void
      */
     public function handle(SeriesCreatedEvent $event)
     {
         $userList = User::all();
-        foreach ($userList as $index => $user){
+        foreach ($userList as $index => $user) {
             $email = new SeriesCreated(
                 $event->seriesName,
                 $event->seriesId,
                 $event->seriesSeasonsQty,
                 $event->seriesEpisodesPerSeason,
             );
-            $when = new DateTime();
             $when = now()->addSeconds($index * 5);
             Mail::to($user)->later($when, $email);
-
-            // comando para executar a fila de email
-            // php artisan queue:listen --tries=2
         }
     }
 }

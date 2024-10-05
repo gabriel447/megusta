@@ -10,7 +10,7 @@ class Series extends Model
 {
     use HasFactory;
     protected $fillable = ['nome', 'cover'];
-    
+
     public function seasons()
     {
         return $this->hasMany(Season::class, 'series_id');
@@ -18,7 +18,7 @@ class Series extends Model
 
     protected static function booted()
     {
-        self::addGlobalScope('ordered', function(Builder $queryBuilder) {
+        self::addGlobalScope('ordered', function (Builder $queryBuilder) {
             $queryBuilder->orderBy('nome');
         });
     }
