@@ -1,4 +1,4 @@
-##Comandos:
+#Comandos:
 
 `composer install —ignore-platform-reqs`
 
@@ -15,3 +15,5 @@
 `php artisan storage:link`
 
 `php artisan serve`
+
+obs: antes de tudo, crie e configure o arquivo .env
