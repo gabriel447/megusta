@@ -9,7 +9,7 @@ use App\Repositories\SeriesRepository;
 
 class SeriesController extends Controller
 {
-    public function __construct(private SeriesRepository $repository){}
+    public function __construct(private SeriesRepository $repository) {}
 
     public function index()
     {
@@ -24,7 +24,10 @@ class SeriesController extends Controller
     }
 
     public function store(SeriesFormRequest $request)
-    {   $coverPath = $request->file('cover')->store('series_cover', 'public');
+    {
+        $coverPath = $request->hasFile('cover')
+            ? $request->file('cover')->store('series_cover', 'public')
+            : null;
         $request->coverPath = $coverPath;
         $serie = $this->repository->add($request);
         \App\Events\SeriesCreated::dispatch(
@@ -59,4 +62,3 @@ class SeriesController extends Controller
         return to_route('series.index')->with('mensagem.sucesso', "Série '{$series->nome}' atualizada com sucesso!");
     }
 }
-
