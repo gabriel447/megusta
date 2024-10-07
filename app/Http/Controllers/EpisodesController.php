@@ -18,13 +18,18 @@ class EpisodesController
 
     public function update(Request $request, Season $season)
     {
-        $watchedEpisodes = $request->episodes;
+        $watchedEpisodes = $request->input('episodes');
+    
+        if ($watchedEpisodes === null) {
+            $watchedEpisodes = [];
+        }
+    
         $season->episodes->each(function (Episode $episode) use ($watchedEpisodes) {
             $episode->watched = in_array($episode->id, $watchedEpisodes);
         });
-
+    
         $season->push();
-
+    
         return to_route('episodes.index', $season->id)
             ->with('mensagem.sucesso', 'Episódios marcados como assistidos');
     }
