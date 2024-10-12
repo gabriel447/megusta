@@ -9,3 +9,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/series', [SeriesController::class, 'index']);
+
+Route::post('/series', [SeriesController::class, 'store']);
