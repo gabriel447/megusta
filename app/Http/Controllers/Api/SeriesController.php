@@ -6,6 +6,7 @@ use App\Repositories\SeriesRepository;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SeriesFormRequest;
 use App\Models\Series;
+use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\Request;
 
 class SeriesController extends Controller
@@ -46,9 +47,9 @@ class SeriesController extends Controller
         return $series;
     }
     
-    public function destroy(int $series) 
+    public function destroy(int $series, Authenticatable $user) 
     {
-       Series::destroy($series);
-       return response()->noContent();
+        Series::destroy($series);
+        return response()->noContent();
     }
 }
